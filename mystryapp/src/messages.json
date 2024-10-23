@@ -1,0 +1,53 @@
+[
+    {
+      "title": "Welcome Message",
+      "content": "Hello, welcome to our service! We're excited to have you onboard.",
+      "received": "2 minutes ago"
+    },
+    {
+      "title": "Update Notification",
+      "content": "Your account has been updated successfully. Please review the changes in your profile.",
+      "received": "5 minutes ago"
+    },
+    {
+      "title": "Reminder",
+      "content": "Don't forget to check out the new features we just launched. Visit the dashboard to explore more.",
+      "received": "10 minutes ago"
+    },
+    {
+      "title": "Support Ticket Reply",
+      "content": "Your support ticket has been resolved. If you need further assistance, feel free to reach out.",
+      "received": "15 minutes ago"
+    },
+    {
+      "title": "New Message",
+      "content": "You have a new message from the admin team. Please check your inbox.",
+      "received": "20 minutes ago"
+    },
+    {
+      "title": "Scheduled Maintenance",
+      "content": "We will be undergoing scheduled maintenance tomorrow at 2 AM. Services might be disrupted during this time.",
+      "received": "30 minutes ago"
+    },
+    {
+      "title": "Promotion Offer",
+      "content": "Get 20% off on your next subscription renewal. Use code RENEW20.",
+      "received": "40 minutes ago"
+    },
+    {
+      "title": "Security Alert",
+      "content": "A login attempt was made on your account from an unfamiliar device. If this wasn't you, please secure your account.",
+      "received": "1 hour ago"
+    },
+    {
+      "title": "Account Suspension",
+      "content": "Your account has been temporarily suspended due to suspicious activity. Please contact support for further details.",
+      "received": "2 hours ago"
+    },
+    {
+      "title": "Service Restored",
+      "content": "The outage earlier today has been resolved. All services are back online.",
+      "received": "3 hours ago"
+    }
+  ]
+  
