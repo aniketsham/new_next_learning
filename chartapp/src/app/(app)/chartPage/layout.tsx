@@ -1,5 +1,8 @@
 
 import { Metadata } from 'next';
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -11,9 +14,12 @@ export const metadata: Metadata = {
 };
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
-    
+    <SidebarProvider>
+      <AppSidebar />
+    <div className=" w-full lg:h-[80vh] lg:p-10 sm:p-5">
+    <SidebarTrigger />
       {children}
     </div>
+    </SidebarProvider>
   );
 }

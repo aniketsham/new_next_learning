@@ -1,8 +1,9 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { LabelList, Pie, PieChart,Sector } from "recharts"
+import { Label, Pie, PieChart, Sector } from "recharts"
 import { PieSectorDataItem } from "recharts/types/polar/Pie"
+
 import {
   Card,
   CardContent,
@@ -18,7 +19,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-
+export const description = "A donut chart with an active sector"
 
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
@@ -54,59 +55,50 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-
-const page = () => {
-    return (
-        <Card className="flex flex-col h-screen">
-          <CardHeader className="items-center pb-0">
-            <CardTitle>Pie Chart - Label List</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1 pb-0">
-            <ChartContainer
-              config={chartConfig}
-              className="mx-auto aspect-square h-screen w-full [&_.recharts-text]:fill-background"
-            >
-              <PieChart >
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                 data={chartData}
-                  innerRadius={300} 
-                  dataKey="visitors"
-                  
-                  activeShape={({
-                    outerRadius = 0,
-                    ...props
-                  }: PieSectorDataItem) => (
-                    <Sector {...props} outerRadius={outerRadius + 10} />
-                  )}
-                  >
-                  <LabelList
-                    dataKey="browser"
-                    className="fill-background"
-                    stroke="none"
-                    fontSize={12}
-                    formatter={(value: keyof typeof chartConfig) =>
-                      chartConfig[value]?.label
-                    }
-                  />
-                </Pie>
-              </PieChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="leading-none text-muted-foreground">
-              Showing total visitors for the last 6 months
-            </div>
-          </CardFooter>
-        </Card>
-      )
+const PieChartSection=()=> {
+  return (
+    <Card className="flex flex-col w-screen">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>Pie Chart - Donut Active</CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-video max-h-[250px]"
+        >
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={60}
+              strokeWidth={5}
+              activeIndex={0}
+              activeShape={({
+                outerRadius = 0,
+                ...props
+              }: PieSectorDataItem) => (
+                <Sector {...props} outerRadius={outerRadius + 10} />
+              )}
+            />
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  )
 }
 
-export default page
+export default PieChartSection

@@ -3,6 +3,7 @@
 import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import { Button } from "@/components/ui/button"
+import { X } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -17,7 +18,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -41,14 +46,45 @@ const chartConfig = {
 
 const BarChartSection=() =>{
   return (
-    <div className="flex justify-center items-center ">
+    <div className="flex justify-center h-[80vh]">
+
+    <div className="flex  items-center overflow-y-hidden">
+      <Popover>
+      
       <Card>
       <CardHeader>
+      <PopoverTrigger className="flex justify-end z-10"><X/></PopoverTrigger>
         <CardTitle>Bar Chart - Multiple</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardDescription>January - June 2024 </CardDescription>
+        <PopoverContent className="flex justify-center items-center">
+
+          <Card className="p-10 top-0">
+          <CardTitle>Bar Chart - Detailed</CardTitle>
+
+        <ChartContainer className="h-[500px] w-[80vw]" config={chartConfig} >
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dashed" />}
+            />
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+          </BarChart>
+        </ChartContainer>
+        </Card>
+        </PopoverContent>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[500px]">
+   
+        <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -77,11 +113,13 @@ const BarChartSection=() =>{
       </CardFooter>
 
 
-<Button variant="outline">Button</Button>
-
     </Card>
+    
+    </Popover>
     </div>
     
+    </div>
+
   )
 }
 

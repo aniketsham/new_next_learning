@@ -11,6 +11,7 @@ import { Form,FormControl,FormField,FormItem, FormMessage, FormLabel } from '@/c
 import { signUpSchema, } from '@/schemas/signupSchema'
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from 'next/navigation'
+import { useDebounce } from 'use-debounce';
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2, Loader2Icon } from 'lucide-react'
@@ -19,6 +20,7 @@ const page = () => {
   const [usernameMessage,setUsernameMessage]=useState("")
   const [isCheckingUsername,setIsCheckingUsername]=useState(false)
   const [isSubmitting,setIsSubmitting]=useState(false)
+  const [debouncedUsername] = useDebounce(username, 500);
   const { toast } = useToast()
   const router=useRouter();
 
@@ -37,13 +39,14 @@ const page = () => {
 
   useEffect(() => {
     const checkUsernameUnique = async () => {
-      if (username) {
+      if (debouncedUsername) {
         setIsCheckingUsername(true);
         setUsernameMessage(''); // Reset message
         try {
           const response = await axios.get<apiResponse>(
-            `/api/check-username-unique?username=${username}`
+            `/api/check-username-unique?username=${debouncedUsername}`
           );
+          console.log(response)
           setUsernameMessage(response.data.message);
         } catch (error) {
           const axiosError = error as AxiosError<apiResponse>;
@@ -56,7 +59,7 @@ const page = () => {
       }
     };
     checkUsernameUnique();
-  }, [username]);
+  }, [debouncedUsername]);
 
   const onSubmit=async(data:z.infer<typeof signUpSchema>)=>{
     setIsSubmitting(true)

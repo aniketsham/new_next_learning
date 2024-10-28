@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
-
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -26,11 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+       <head>
+        <ColorSchemeScript />      
+      </head>
       <AuthProvider>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  block m-auto `}
       >
-        {children}
+         <MantineProvider >{children}</MantineProvider>
       </body>
       </AuthProvider>
     </html>
